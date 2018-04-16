@@ -15,6 +15,11 @@
 		87F7B1962082D27F00A0E3DD /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 87F7B1952082D27F00A0E3DD /* main.m */; };
 		87F7B1A02082D27F00A0E3DD /* NameListTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 87F7B19F2082D27F00A0E3DD /* NameListTests.m */; };
 		87F7B1AB2082D27F00A0E3DD /* NameListUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 87F7B1AA2082D27F00A0E3DD /* NameListUITests.m */; };
+		87F7B1BA2082D30700A0E3DD /* HomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 87F7B1B92082D30700A0E3DD /* HomeViewController.m */; };
+		87F7B1BD2082D43C00A0E3DD /* StudentModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 87F7B1BC2082D43C00A0E3DD /* StudentModel.m */; };
+		87F7B1C02082D50400A0E3DD /* AddViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 87F7B1BF2082D50400A0E3DD /* AddViewController.m */; };
+		87F7B1C32083775300A0E3DD /* SQLManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 87F7B1C22083775300A0E3DD /* SQLManager.m */; };
+		87F7B1C62083791800A0E3DD /* libsqlite3.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 87F7B1C52083791800A0E3DD /* libsqlite3.tbd */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -51,6 +56,15 @@
 		87F7B1A62082D27F00A0E3DD /* NameListUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = NameListUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		87F7B1AA2082D27F00A0E3DD /* NameListUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NameListUITests.m; sourceTree = "<group>"; };
 		87F7B1AC2082D27F00A0E3DD /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		87F7B1B82082D30700A0E3DD /* HomeViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HomeViewController.h; sourceTree = "<group>"; };
+		87F7B1B92082D30700A0E3DD /* HomeViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HomeViewController.m; sourceTree = "<group>"; };
+		87F7B1BB2082D43C00A0E3DD /* StudentModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = StudentModel.h; sourceTree = "<group>"; };
+		87F7B1BC2082D43C00A0E3DD /* StudentModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = StudentModel.m; sourceTree = "<group>"; };
+		87F7B1BE2082D50400A0E3DD /* AddViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AddViewController.h; sourceTree = "<group>"; };
+		87F7B1BF2082D50400A0E3DD /* AddViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AddViewController.m; sourceTree = "<group>"; };
+		87F7B1C12083775300A0E3DD /* SQLManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SQLManager.h; sourceTree = "<group>"; };
+		87F7B1C22083775300A0E3DD /* SQLManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SQLManager.m; sourceTree = "<group>"; };
+		87F7B1C52083791800A0E3DD /* libsqlite3.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.tbd; path = usr/lib/libsqlite3.tbd; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -58,6 +72,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				87F7B1C62083791800A0E3DD /* libsqlite3.tbd in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -85,6 +100,7 @@
 				87F7B19E2082D27F00A0E3DD /* NameListTests */,
 				87F7B1A92082D27F00A0E3DD /* NameListUITests */,
 				87F7B1842082D27E00A0E3DD /* Products */,
+				87F7B1C42083791800A0E3DD /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -110,6 +126,14 @@
 				87F7B1912082D27F00A0E3DD /* LaunchScreen.storyboard */,
 				87F7B1942082D27F00A0E3DD /* Info.plist */,
 				87F7B1952082D27F00A0E3DD /* main.m */,
+				87F7B1B82082D30700A0E3DD /* HomeViewController.h */,
+				87F7B1B92082D30700A0E3DD /* HomeViewController.m */,
+				87F7B1BB2082D43C00A0E3DD /* StudentModel.h */,
+				87F7B1BC2082D43C00A0E3DD /* StudentModel.m */,
+				87F7B1BE2082D50400A0E3DD /* AddViewController.h */,
+				87F7B1BF2082D50400A0E3DD /* AddViewController.m */,
+				87F7B1C12083775300A0E3DD /* SQLManager.h */,
+				87F7B1C22083775300A0E3DD /* SQLManager.m */,
 			);
 			path = NameList;
 			sourceTree = "<group>";
@@ -130,6 +154,14 @@
 				87F7B1AC2082D27F00A0E3DD /* Info.plist */,
 			);
 			path = NameListUITests;
+			sourceTree = "<group>";
+		};
+		87F7B1C42083791800A0E3DD /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				87F7B1C52083791800A0E3DD /* libsqlite3.tbd */,
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -267,7 +299,11 @@
 			files = (
 				87F7B18B2082D27F00A0E3DD /* ViewController.m in Sources */,
 				87F7B1962082D27F00A0E3DD /* main.m in Sources */,
+				87F7B1C02082D50400A0E3DD /* AddViewController.m in Sources */,
+				87F7B1BD2082D43C00A0E3DD /* StudentModel.m in Sources */,
 				87F7B1882082D27F00A0E3DD /* AppDelegate.m in Sources */,
+				87F7B1C32083775300A0E3DD /* SQLManager.m in Sources */,
+				87F7B1BA2082D30700A0E3DD /* HomeViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
