@@ -64,8 +64,7 @@ static SQLManager * manager = nil;
     NSString * path = [self applicationDocumentsDirectorFile];
     
     if (sqlite3_open([path UTF8String], &db) != SQLITE_OK) {
-        sqlite3_close(db);
-        NSAssert(NO, @"打开数据库失败！");
+        [self openDatabaseError];
     }else {
         NSString * qsql = @"SELECT idNum,name FROM StudentName where idNum = ?";
         sqlite3_stmt * statement;//语句对象
@@ -81,7 +80,7 @@ static SQLManager * manager = nil;
             NSString * idNum = model.idNum;
             //绑定操作
             //第一个参数 语句对象
-            //第二个参数 参数执行的序号,就是sql语句预留的占位符？的序号
+            //第二个参数 参数执行的序号,就是sql语句预留的占位符？的序号 1代表sql语句中的第一个问号，问号的下标是从1开始的
             //第三个参数 我们要绑定的值
             //第四个参数 绑定的字符串的长度
             //第五个参数 指针 NULL
@@ -119,8 +118,7 @@ static SQLManager * manager = nil;
 - (int)insert:(StudentModel *)model {
     NSString * path = [self applicationDocumentsDirectorFile];
     if (sqlite3_open([path UTF8String], &db) != SQLITE_OK) {
-        sqlite3_close(db);
-        NSAssert(NO, @"数据库打开失败！");
+        [self openDatabaseError];
     }else {
         NSString * sql = @"INSERT OR REPLACE INTO StudentName (idNum, name) VALUES (?, ?)";// ;?
         sqlite3_stmt * statement;
@@ -142,10 +140,62 @@ static SQLManager * manager = nil;
 
 - (void)remove:(StudentModel *)model {
     /* */
+    NSString * path = [self applicationDocumentsDirectorFile];
+    if (sqlite3_open([path UTF8String], &db) != SQLITE_OK) {
+        [self openDatabaseError];
+    }else {
+        NSString * sql = @"DELETE FROM StudentName WHERE idNum = ?";
+        sqlite3_stmt * statement;
+        //预处理
+        if (sqlite3_prepare_v2(db, [sql UTF8String], -1, &statement, NULL) == SQLITE_OK) {
+            sqlite3_bind_text(statement, 1, [model.idNum UTF8String], -1, NULL);
+            
+            if (sqlite3_step(statement) != SQLITE_DONE) {
+                NSAssert(NO, @"删除数据失败！");
+            }
+            
+            sqlite3_finalize(statement);
+            sqlite3_close(db);
+        }
+    }
 }
 
 - (void)modify:(StudentModel *)model {
     
+}
+
+// 查找所有的数据
+- (NSArray *)selectData {
+    NSString * path = [self applicationDocumentsDirectorFile];
+    if (sqlite3_open([path UTF8String], &db) != SQLITE_OK) {
+        [self openDatabaseError];
+    }else {
+        NSString * sql = @"SELECT * FROM StudentName";
+        sqlite3_stmt * statement;
+        NSMutableArray * arr = nil;
+        if (sqlite3_prepare_v2(db, [sql UTF8String], -1, &statement, NULL) == SQLITE_OK) {
+            arr = [NSMutableArray array];
+            while (sqlite3_step(statement) == SQLITE_ROW) {
+                //获取记录中的字段值 第一个参数是语句对象，第二个参数是字段的下标，从0开始
+                char * cName = (char *)sqlite3_column_text(statement, 0);
+                char * cIdNum = (char *)sqlite3_column_text(statement, 1);
+                
+                NSString * name = [NSString stringWithUTF8String:cName];
+                NSString * idNum = [NSString stringWithUTF8String:cIdNum];
+                StudentModel * model = [[StudentModel alloc] init];
+                model.name = name;
+                model.idNum = idNum;
+                [arr addObject:model];
+            }
+            return arr;
+        }
+    }
+    return nil;
+}
+
+- (void)openDatabaseError {
+    sqlite3_close(db);
+    NSAssert(NO, @"数据库打开失败");
 }
 
 @end

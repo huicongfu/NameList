@@ -24,4 +24,6 @@
 
 - (void)modify:(StudentModel *)model;
 
+- (NSArray *)selectData;
+
 @end

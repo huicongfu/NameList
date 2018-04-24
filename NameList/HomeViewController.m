@@ -13,6 +13,7 @@
 @interface HomeViewController ()
 
 @property (nonatomic, retain) NSMutableArray * studentArray;
+@property (nonatomic, retain) UIRefreshControl * rfc;
 
 @end
 
@@ -23,7 +24,13 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    self.rfc = [[UIRefreshControl alloc] init];
+    self.rfc.attributedTitle = [[NSAttributedString alloc] initWithString:@"下拉刷新"];
+    [self.rfc addTarget:self action:@selector(updateAllData) forControlEvents:UIControlEventValueChanged];
+    self.refreshControl = self.rfc;
+    
     self.studentArray = [[NSMutableArray alloc] init];
+    [self updateAllData];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -61,10 +68,24 @@
 }
 
 - (IBAction)addUserDone:(UIStoryboardSegue *)sender {
-    StudentModel * model = [[StudentModel alloc] init];
-    model.idNum = @"100";
-    StudentModel * result = [[SQLManager shareManager] searchWithIdNum:model];
-    [_studentArray addObject:result];
+//    StudentModel * model = [[StudentModel alloc] init];
+//    model.idNum = @"100";
+//    StudentModel * result = [[SQLManager shareManager] searchWithIdNum:model];
+    
+    [self updateAllData];
+}
+
+- (void)updateAllData {
+    
+    if (self.refreshControl.refreshing) {
+        self.refreshControl.attributedTitle = [[NSAttributedString alloc] initWithString:@"刷新中···"];
+    }
+    
+    [_studentArray removeAllObjects];
+    [_studentArray addObjectsFromArray:[[SQLManager shareManager] selectData]];
+    
+    [self.refreshControl endRefreshing];
+    
     [self.tableView reloadData];
 }
 
@@ -75,17 +96,21 @@
 }
 
 
-/*
+
 // Override to support editing the table view.
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
     if (editingStyle == UITableViewCellEditingStyleDelete) {
         // Delete the row from the data source
+        StudentModel * model = [self.studentArray objectAtIndex:indexPath.row];
+        [[SQLManager shareManager] remove:model];
+        [self.studentArray removeObjectAtIndex:indexPath.row];
         [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
+        [tableView reloadData];
     } else if (editingStyle == UITableViewCellEditingStyleInsert) {
         // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
     }   
 }
-*/
+
 
 /*
 // Override to support rearranging the table view.
